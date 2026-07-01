@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>llama.cpp backend benchmarks</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header>
+      <h1>llama.cpp backend prefill benchmarks</h1>
+      <p>AMD Ryzen AI MAX+ 395 “Strix Halo” · Radeon 8060S · 128GB unified memory</p>
+      <p id="sys-info">gfx1151 / RDNA3.5 · depth, batch, and ubatch sweep by backend</p>
+      <p id="run-info">Data source: <a href="data/benchmark.json">benchmark.json</a></p>
+    </header>
+
+    <section class="controls simple-controls">
+      <div class="control">
+        <label for="filter-search">Search models</label>
+        <input id="filter-search" type="text" placeholder="qwen, minimax, ornith">
+      </div>
+      <div class="control">
+        <label for="filter-backend">Backend</label>
+        <select id="filter-backend">
+          <option value="">All backends</option>
+        </select>
+      </div>
+      <div class="control action-control">
+        <label>&nbsp;</label>
+        <button id="reset-filters" type="button" class="chip small">Reset filters</button>
+      </div>
+    </section>
+
+    <section class="panel compact">
+      <div class="panel-split">
+        <div class="stats-box" id="stats-line">Loading...</div>
+        <a class="chip small link-chip" href="data/benchmark.json">Download JSON</a>
+      </div>
+    </section>
+
+    <main>
+      <section class="panel compact">
+        <h2>System and backends</h2>
+        <div class="table-wrap">
+          <table id="systemTable">
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="models" id="models"></section>
+    </main>
+
+    <footer>
+      <span id="datasetId"></span>
+      <a href="data/benchmark.json">Dataset JSON</a>
+    </footer>
+
+    <script src="site.js"></script>
+  </body>
+</html>

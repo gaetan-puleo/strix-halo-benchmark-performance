@@ -1,0 +1,12 @@
+{
+  "name": "llama-rocm-patched-benchmarks",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "bench": "node scripts/run-benchmark.mjs",
+    "bench:local": "bash scripts/bench-local.sh",
+    "serve": "node scripts/serve.mjs",
+    "validate": "node scripts/validate-data.mjs"
+  }
+}

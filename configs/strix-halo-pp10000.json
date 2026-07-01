@@ -1,0 +1,103 @@
+{
+  "dataset": {
+    "id": "2026-06-28-strix-halo-pp10000",
+    "date": "2026-06-28",
+    "title": "Strix Halo ROCm PP10000 llama.cpp benchmark",
+    "rawCsv": "data/2026-06-28-strix-halo-pp10000/results.csv"
+  },
+  "system": {
+    "cpuGpu": "AMD Ryzen AI MAX+ 395 with Radeon 8060S",
+    "gpu": "AMD Radeon 8060S Graphics",
+    "arch": "gfx1151 / RDNA3.5",
+    "memory": "126976 MiB UMA reported as ROCm VRAM",
+    "waveSize": "32",
+    "backend": "ROCm 7.2.4"
+  },
+  "bench": {
+    "prompt": 2080,
+    "depths": "512,10000,25000,50000,75000,100000",
+    "contextTokens": 100000,
+    "contextLabel": "512-100000",
+    "gen": 0,
+    "repetitions": 3,
+    "ngl": 999,
+    "flashAttn": "on",
+    "mmap": 0,
+    "output": "jsonl"
+  },
+  "output": {
+    "json": "data/benchmark.json",
+    "rawDir": "results/raw"
+  },
+  "builds": [
+    {
+      "label": "llama.cpp ROCm stock",
+      "shortLabel": "stock",
+      "backend": "ROCm",
+      "backendVersion": "7.2.4",
+      "backendLabel": "ROCm 7.2.4",
+      "variant": "stock",
+      "commit": "86b94708f",
+      "version": "9843",
+      "patched": false
+    },
+    {
+      "label": "llama.cpp ROCm patched",
+      "shortLabel": "patched",
+      "backend": "ROCm",
+      "backendVersion": "7.2.4",
+      "backendLabel": "ROCm 7.2.4 patched",
+      "variant": "patched",
+      "commit": "86b94708f",
+      "version": "9843",
+      "patched": true
+    }
+  ],
+  "models": [
+    {
+      "id": "minimax-m2-230b-a10b-q3km",
+      "family": "MiniMax-M2.7",
+      "name": "MiniMax-M2.7 230B.A10B Q3_K_M",
+      "path": "/home/gaetan/Downloads/MiniMax-M2.7-UD-Q3_K_M-00001-of-00004.gguf",
+      "file": "MiniMax-M2.7-UD-Q3_K_M-00001-of-00004.gguf",
+      "architecture": "minimax-m2",
+      "quant": "Q3_K_M",
+      "quantProvider": "Unsloth",
+      "paramsB": 228.69,
+      "sizeGiB": 94.28,
+      "shape": "62 layers, 3072 embedding, 256 experts, top-8, expert FFN 1536"
+    },
+    {
+      "id": "ornith-1-35b-q8",
+      "family": "Ornith 1.0 35B",
+      "name": "Ornith 1.0 35B Q8_0",
+      "path": "/home/gaetan/Downloads/ornith-1.0-35b-Q8_0.gguf",
+      "file": "ornith-1.0-35b-Q8_0.gguf",
+      "architecture": "qwen35moe",
+      "quant": "Q8_0",
+      "quantProvider": "Unknown",
+      "paramsB": 34.66,
+      "sizeGiB": 34.36,
+      "shape": "40 layers, 2048 embedding, 256 experts, top-8, expert FFN 512, shared FFN 512"
+    },
+    {
+      "id": "qwen36-35b-a3b-q8",
+      "family": "Qwen3.6 35B-A3B",
+      "name": "Qwen3.6 35B-A3B Q8_0",
+      "path": "/home/gaetan/Downloads/Qwen3.6-35B-A3B-UD-Q8_K_XL.gguf",
+      "file": "Qwen3.6-35B-A3B-UD-Q8_K_XL.gguf",
+      "architecture": "qwen35moe",
+      "quant": "Q8_0",
+      "quantProvider": "Unsloth",
+      "paramsB": 34.66,
+      "sizeGiB": 35.8,
+      "shape": "40 layers, 2048 embedding, 256 experts, top-8, expert FFN 512, shared FFN 512"
+    }
+  ],
+  "runs": [
+    { "id": "b2048-ub512", "mode": "default", "b": 2048, "ub": 512 },
+    { "id": "b2048-ub2048", "mode": "sweep", "b": 2048, "ub": 2048 },
+    { "id": "b4096-ub2048", "mode": "sweep", "b": 4096, "ub": 2048 },
+    { "id": "b4096-ub4096", "mode": "sweep", "b": 4096, "ub": 4096 }
+  ]
+}
