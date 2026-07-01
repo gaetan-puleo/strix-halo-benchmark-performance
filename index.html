@@ -8,22 +8,28 @@
   </head>
   <body>
     <header>
-      <h1>llama.cpp backend prefill benchmarks</h1>
-      <p>AMD Ryzen AI MAX+ 395 “Strix Halo” · Radeon 8060S · 128GB unified memory</p>
-      <p id="sys-info">gfx1151 / RDNA3.5 · depth, batch, and ubatch sweep by backend</p>
-      <p id="run-info">Data source: <a href="data/benchmark.json">benchmark.json</a></p>
+      <div class="hero-title">
+        <h1>Strix Halo llama.cpp Benchmarks</h1>
+        <p>Prefill throughput on Ryzen AI MAX+ 395 / Radeon 8060S</p>
+      </div>
+      <div class="hero-meta">
+        <span class="hero-chip">128GB UMA</span>
+        <span id="sys-info" class="hero-chip">ROCm</span>
+        <span id="run-info" class="hero-chip">Loading</span>
+      </div>
     </header>
 
     <section class="controls simple-controls">
-      <div class="control">
+      <div class="control search-control">
         <label for="filter-search">Search models</label>
-        <input id="filter-search" type="text" placeholder="qwen, minimax, ornith">
+        <div id="model-autocomplete" class="autocomplete">
+          <input id="filter-search" type="text" placeholder="Search by model, family, quant" autocomplete="off" role="combobox" aria-autocomplete="list" aria-controls="search-suggestions" aria-expanded="false">
+          <div id="search-suggestions" class="autocomplete-panel" role="listbox" hidden></div>
+        </div>
       </div>
       <div class="control">
-        <label for="filter-backend">Backend</label>
-        <select id="filter-backend">
-          <option value="">All backends</option>
-        </select>
+        <label>Backend</label>
+        <div id="filter-backend" class="backend-filter" role="group" aria-label="Backend filter"></div>
       </div>
       <div class="control action-control">
         <label>&nbsp;</label>
@@ -31,22 +37,21 @@
       </div>
     </section>
 
-    <section class="panel compact">
-      <div class="panel-split">
-        <div class="stats-box" id="stats-line">Loading...</div>
-        <a class="chip small link-chip" href="data/benchmark.json">Download JSON</a>
+    <section class="protocol-strip" aria-label="Benchmark protocol">
+      <div class="protocol-command" aria-label="Benchmark command">
+        <code>llama-bench -m /path/to/model.gguf -o jsonl -p 2080 -d 512,10000,25000,50000,75000,100000 -b &lt;batch&gt; -ub &lt;ubatch&gt; -n 0 -r 3 -ngl 999 -fa on -mmp 0</code>
       </div>
     </section>
 
     <main>
-      <section class="panel compact">
-        <h2>System and backends</h2>
+      <details class="panel compact system-details">
+        <summary>System and build details</summary>
         <div class="table-wrap">
           <table id="systemTable">
             <tbody></tbody>
           </table>
         </div>
-      </section>
+      </details>
 
       <section class="models" id="models"></section>
     </main>
